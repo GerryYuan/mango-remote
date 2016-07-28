@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+    http://www.springframework.org/schema/context 
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+    <context:property-placeholder location="file:./conf/*.properties"
+        file-encoding="UTF-8" />
+    <bean id="server" name="Main" class="org.eclipse.jetty.server.Server"
+        init-method="start" destroy-method="stop">
+        <constructor-arg>
+            <bean id="threadPool" class="org.eclipse.jetty.util.thread.QueuedThreadPool">
+                <property name="minThreads" value="10" />
+                <property name="maxThreads" value="50" />
+            </bean>
+        </constructor-arg>
+        <property name="connectors">
+            <list>
+                <bean id="connector" class="org.eclipse.jetty.server.ServerConnector">
+                    <constructor-arg ref="server" />
+                    <property name="port" value="${http.port}"></property>
+                </bean>
+            </list>
+        </property>
+        <property name="handler">
+            <bean id="webAppContext" class="org.eclipse.jetty.webapp.WebAppContext">
+                <property name="defaultsDescriptor"
+                    value="com/gerry/common/framework/server/jetty/config/webdefault.xml" />
+                <property name="contextPath">
+                    <value>${http.contextPath}</value>
+                </property>
+                <property name="resourceBase" value="WebContent" />
+            </bean>
+        </property>
+    </bean>
+</beans>
