@@ -1,8 +1,14 @@
 # mango-remote
 spring remote http invoke, orm mango example
 
-  运行：
+  client运行：
   ```
   org.jfaster.mango.StartAppWorker
   ```
-  启动
+  server运行：
+  
+  初始化脚本：DB/init.sql
+  
+  ```
+  org.jfaster.mango.StartServerWorker
+  ```
