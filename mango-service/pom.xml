@@ -21,6 +21,12 @@
 			<artifactId>gerry-common-version-control</artifactId>
 			<version>${gerry-common-version-control.version}</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jfaster/mango -->
+<dependency>
+    <groupId>org.jfaster</groupId>
+    <artifactId>mango</artifactId>
+    <version>1.4.0</version>
+</dependency>
 	</dependencies>
 	<build>
 		<plugins>
